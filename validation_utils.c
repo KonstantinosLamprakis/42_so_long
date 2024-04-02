@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:28:42 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/02 15:45:29 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:38:31 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	check_chars(char **map)
 		}
 		map++;
 	}
-	return (is_c != 0);
+	return ((is_c != 0) && is_p && is_e);
 }
 // returns 0 on error, 1 otherwise
 // errors:

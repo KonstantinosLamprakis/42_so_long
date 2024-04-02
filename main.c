@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:31:49 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/02 15:43:35 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:23:46 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ int	main(int argc, char **argv)
 
 	map = validate_input(argc, argv);
 	if (!map)
+	{
 		printf("Error");
+		exit(1);
+	}
 	i = -1;
 	while (map[++i])
 		printf("%s\n", map[i]);
