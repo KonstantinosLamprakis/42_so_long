@@ -7,33 +7,30 @@ OBJS = $(SRCS:.c=.o)
 
 NAME = so_long
 
-HEADER = so_long.h
+LIBMLX = ../MLX42
 
-INCLUDES = -Iincludes
+HEADERS = -I so_long.h -I $(LIBMLX)/include
 
-.c.o:
-	$(CC) -c -o $@ $< $(INCLUDES)
-# $(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
+LIBS = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-# Link X11 and MLX, and use OpenGL and AppKit
-MLX_FLAGS = -Lincludes -framework OpenGL -framework AppKit
-# MLX_FLAGS = -Lmlx -lmlx -Lincludes -lXext -lX11 -framework OpenGL -framework AppKit
+all: libmlx $(NAME)
 
-all: $(NAME)
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+
+%.o: %.c
+	cc $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(NAME): $(OBJS)
-	$(CC) -o $(NAME) $(OBJS) $(MLX_FLAGS)
-# $(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_FLAGS)
-
-# $(NAME): $(OBJS) $(HEADER)
-# 	cc $(CFLAGS) -I$(HEADER) $(OBJS) -o $@
+	cc $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 
 clean:
-	rm -f $(OBJS)
+	@rm -rf $(OBJS)
+	@rm -rf $(LIBMLX)/build
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -rf $(NAME)
 
-re: fclean all
+re: clean all
 
-.PHONY: all clean fclean re
+.PHONY: all, clean, fclean, re, libmlx

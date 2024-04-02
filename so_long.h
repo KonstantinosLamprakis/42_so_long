@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:42:40 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/02 06:59:49 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:43:20 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
+
+# include "../MLX42/include/MLX42/MLX42.h"
 
 // typedef struct s_line
 // {
