@@ -6,13 +6,17 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:31:49 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/02 12:51:42 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:43:35 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// TODO: remove stdio.h from .h
-// TODO: remove wildcard from makefile
-// TODO: check fd for error after open-close-read
+// TODO:
+// remove stdio.h from .h
+// remove wildcard from makefile
+// check fd for error after open-close-read
+	// - on error: free mem, exit with "Error\n" followed by custom error msg
+	// - should have valid path from P to E
+// check for leaks also in get_next_line
 
 /*
 	Input validation rules:
@@ -34,52 +38,64 @@
 */
 
 #include "so_long.h"
-#include "../MLX42/include/MLX42/MLX42.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#define WIDTH 256
-#define HEIGHT 256
-
-// Exit the program as failure.
-static void ft_error(void)
+int	main(int argc, char **argv)
 {
-	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
-	exit(EXIT_FAILURE);
+	char	**map;
+	int		i;
+
+	map = validate_input(argc, argv);
+	if (!map)
+		printf("Error");
+	i = -1;
+	while (map[++i])
+		printf("%s\n", map[i]);
 }
 
-// Print the window width and height.
-static void ft_hook(void* param)
-{
-	const mlx_t* mlx = param;
+// #include <stdlib.h>
+// #include <stdio.h>
+// #include <unistd.h>
+// #define WIDTH 256
+// #define HEIGHT 256
 
-	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
-}
+// // Exit the program as failure.
+// static void ft_error(void)
+// {
+// 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
+// 	exit(EXIT_FAILURE);
+// }
 
-int32_t	main(void)
-{
+// // Print the window width and height.
+// static void ft_hook(void* param)
+// {
+// 	const mlx_t* mlx = param;
 
-	// MLX allows you to define its core behaviour before startup.
-	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "421Balls", true);
-	if (!mlx)
-		ft_error();
+// 	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
+// }
 
-	/* Do stuff */
+// int32_t	main(void)
+// {
 
-	// Create and display the image.
-	mlx_image_t* img = mlx_new_image(mlx, 256, 256);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-		ft_error();
+// 	// MLX allows you to define its core behaviour before startup.
+// 	mlx_set_setting(MLX_MAXIMIZED, true);
+// 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "421Balls", true);
+// 	if (!mlx)
+// 		ft_error();
 
-	// Even after the image is being displayed, we can still modify the buffer.
-	mlx_put_pixel(img, 0, 0, 0xFF0000FF);
+// 	/* Do stuff */
 
-	// Register a hook and pass mlx as an optional param.
-	// NOTE: Do this before calling mlx_loop!
-	mlx_loop_hook(mlx, ft_hook, mlx);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
-}
+// 	// Create and display the image.
+// 	mlx_image_t* img = mlx_new_image(mlx, 256, 256);
+// 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
+// 		ft_error();
+
+// 	// Even after the image is being displayed, we can still modify the buffer.
+// 	mlx_put_pixel(img, 0, 0, 0xFF0000FF);
+
+// 	// Register a hook and pass mlx as an optional param.
+// 	// NOTE: Do this before calling mlx_loop!
+// 	mlx_loop_hook(mlx, ft_hook, mlx);
+// 	mlx_loop(mlx);
+// 	mlx_terminate(mlx);
+// 	return (EXIT_SUCCESS);
+// }

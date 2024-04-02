@@ -1,7 +1,7 @@
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = main.c
-# SRCS = $(wildcard *.c)
+# SRCS = main.c
+SRCS = $(wildcard *.c)
 
 OBJS = $(SRCS:.c=.o)
 

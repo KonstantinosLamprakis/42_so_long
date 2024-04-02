@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:42:37 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/01 21:36:11 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:36:47 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static char	*get_result(char **mem_str, int *k)
 	int		i;
 	int		j;
 
-	i = *k;
 	if (!(*mem_str))
 		return (NULL);
 	i = 0;

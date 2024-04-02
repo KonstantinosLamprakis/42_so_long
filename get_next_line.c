@@ -6,13 +6,11 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:42:34 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/01 21:41:57 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:52:31 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-// cc -Wall -Werror -Wextra *.c *.h && ./a.out | cat -e
 
 char	*get_next_line(int fd)
 {
