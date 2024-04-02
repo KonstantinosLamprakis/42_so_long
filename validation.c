@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 17:58:02 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/02 15:47:09 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:18:51 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ char	**validate_input(int argc, char **argv)
 		return (NULL);
 	if (!check_nl(&i, fd) || i < 3)
 		return (clean_map_file(NULL, fd));
+	if (close(fd) == -1)
+		return (NULL);
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		return (NULL);
 	map = malloc((i + 1) * sizeof(char *));
 	if (!map)
 		return (clean_map_file(map, fd));
