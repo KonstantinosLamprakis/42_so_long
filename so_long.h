@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:42:40 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/02 15:44:08 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:09:36 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ char	*get_whole_str(char **mem_str);
 int		ft_strlen(char *str);
 char	*get_first_line(char **mem_str);
 // Declarations of validation_utils.c
-int	check_nl(int *num_lines, int fd);
-int	check_borders(char **map);
-int	check_rectagle(char **map);
-int	check_chars(char **map);
-int	check_args(int argc, char **argv);
+int		check_nl(int *num_lines, int fd);
+int		check_borders(char **map);
+int		check_rectagle(char **map);
+int		check_chars(char **map);
+int		check_args(int argc, char **argv);
 // Declarations of validation.c
-char	**validate_input(int argc, char **argv);
+char	**get_map(int argc, char **argv);
 #endif

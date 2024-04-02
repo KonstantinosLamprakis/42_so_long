@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 15:28:42 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/02 18:38:31 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:53:58 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,20 @@ int	check_chars(char **map)
 		j = -1;
 		while ((*map)[++j] != '\0')
 		{
-			if (((*map)[j] == 'P' && is_p)|| ((*map)[j] == 'E' && is_e))
+			if (((*map)[j] == 'P' && is_p) || ((*map)[j] == 'E' && is_e))
 				return (0);
 			is_p += (*map)[j] == 'P';
 			is_e += (*map)[j] == 'E';
 			is_c += (*map)[j] == 'C';
 			if ((*map)[j] != 'P' && (*map)[j] != 'E' && (*map)[j] != 'C')
 				if ((*map)[j] != '0' && (*map)[j] != '1')
-					return(0);
+					return (0);
 		}
 		map++;
 	}
 	return ((is_c != 0) && is_p && is_e);
 }
+
 // returns 0 on error, 1 otherwise
 // errors:
 // - should be rectagle means every sentense same lenth
@@ -141,7 +142,7 @@ int	check_nl(int *num_lines, int fd)
 	while (num_bytes > 0)
 	{
 		if (is_first && buf[0] == '\n')
-			return(0);
+			return (0);
 		is_first = 0;
 		i = -1;
 		while (++i < num_bytes)
@@ -152,7 +153,7 @@ int	check_nl(int *num_lines, int fd)
 		}
 		num_bytes = read(fd, buf, 42);
 	}
-	if(num_bytes == -1)
+	if (num_bytes == -1)
 		return (0);
 	return (++(*num_lines));
 }

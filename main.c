@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:31:49 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/02 16:23:46 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:07:46 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 	// - on error: free mem, exit with "Error\n" followed by custom error msg
 	// - should have valid path from P to E
 // check for leaks also in get_next_line
+// cc -Wall -Werror -Wextra *.c *.h && ./a.out map.ber
 
 /*
 	Input validation rules:
@@ -44,12 +45,9 @@ int	main(int argc, char **argv)
 	char	**map;
 	int		i;
 
-	map = validate_input(argc, argv);
+	map = get_map(argc, argv);
 	if (!map)
-	{
-		printf("Error");
 		exit(1);
-	}
 	i = -1;
 	while (map[++i])
 		printf("%s\n", map[i]);
