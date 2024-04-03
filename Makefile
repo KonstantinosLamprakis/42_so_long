@@ -6,30 +6,24 @@ OBJS = $(SRCS:.c=.o)
 
 NAME = so_long
 
-LIBMLX = ../MLX42
+HEADERS = -I so_long.h -I mlx
 
-HEADERS = -I so_long.h -I $(LIBMLX)/include
-
-LIBS = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-
-all: libmlx $(NAME)
-
-libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+all: $(NAME)
 
 %.o: %.c
 	cc $(CFLAGS) -o $@ -c $< $(HEADERS)
 
-$(NAME): $(OBJS)
-	cc $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+$(NAME): $(OBJS) mlx so_long.h
+	$(MAKE) -C mlx/
+	cc $(CFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit $(HEADERS) -o $(NAME)
 
 clean:
-	@rm -rf $(OBJS)
-	@rm -rf $(LIBMLX)/build
+	rm -rf $(OBJS)
 
 fclean: clean
-	@rm -rf $(NAME)
+	$(MAKE) clean -C mlx/
+	rm -rf $(NAME)
 
-re: clean all
+re: fclean all
 
-.PHONY: all, clean, fclean, re, libmlx
+.PHONY: all, clean, fclean, re
