@@ -6,26 +6,36 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:42:40 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/03 08:52:27 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:19:45 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# define BUFFER_SIZE 42
-
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
-
+// Custom declarations
 # include "./mlx/mlx.h"
+# define BUFFER_SIZE 42
+# define ESC 53
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define UP 126
+# define DOWN 125
+# define LEFT 123
+# define RIGHT 124
+# define ON_DESTROY 17
 
-// typedef struct s_line
-// {
-// 	t_line	*next_line;
-// }		t_line;
+typedef struct s_data
+{
+	void	*mlx;
+	void	*win;
+}			t_data;
 
 // Declarations of get_next_line
 char	*get_next_line(int fd);
