@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:31:49 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/03 18:22:16 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 09:19:54 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ int	on_keypress(int keysym, t_data *data)
 int	main(void)
 {
 	t_data	data;
+	void	*img;
+	char	*relative_path = "./1.xpm";
+	int		img_width = 5;
+	int		img_height = 5;
 
 	data.mlx = mlx_init();
 	if (!data.mlx)
@@ -85,24 +89,15 @@ int	main(void)
 		return (free(data.mlx), 1);
 	mlx_key_hook(data.win, on_keypress, &data);
 	mlx_hook(data.win, ON_DESTROY, 0, exit_program, &data);
+	img = mlx_xpm_file_to_image(data.mlx, relative_path, &img_width, &img_height);
+	mlx_put_image_to_window(data.mlx, data.win, img, 0, 0);
 	mlx_loop(data.mlx);
 	return (0);
 }
 
 // --------------------
 
-// int	main(void)
-// {
-// 	void	*mlx;
-// 	void	*mlx_win;
-
-// 	mlx = mlx_init();
-// 	if (!mlx)
-// 		exit(1);
-// 	mlx_win = mlx_new_window(mlx, 1920, 1080, "The Game of Life");
-// 	mlx_loop(mlx);
-// }
-
+// -- main that takes arg input
 // int	main(int argc, char **argv)
 // {
 // 	char	**map;
@@ -114,4 +109,28 @@ int	main(void)
 // 	i = -1;
 // 	while (map[++i])
 // 		printf("%s\n", map[i]);
+// }
+
+// -- Image with just a color dot
+// void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+// {
+// 	char	*dst;
+
+// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+// 	*(unsigned int*)dst = color;
+// }
+
+// int	main(void)
+// {
+// 	void	*mlx;
+// 	void	*mlx_win;
+// 	t_img	img;
+
+// 	mlx = mlx_init();
+// 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+// 	img.img = mlx_new_image(mlx, 1920, 1080);
+// 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+// 	my_mlx_pixel_put(&img, 50, 50, 0x00FF0000);
+// 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+// 	mlx_loop(mlx);
 // }

@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:42:40 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/03 18:19:45 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 09:17:39 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ typedef struct s_data
 	void	*mlx;
 	void	*win;
 }			t_data;
+
+typedef struct	s_img {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_img;
+
 
 // Declarations of get_next_line
 char	*get_next_line(int fd);
