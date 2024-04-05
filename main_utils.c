@@ -6,12 +6,13 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:20:41 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 11:23:55 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 13:13:50 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	move(t_data *data, int new_x, int new_y);
 
 void	print_map(t_data *data)
 {
@@ -63,21 +64,21 @@ int	get_map_len(char **map)
 	return (i);
 }
 
-void	get_start_pos(int *x, int *y, char **map)
+void	set_start_pos(t_data *data)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	while (map[++i])
+	while (data->map[++i])
 	{
 		j = -1;
-		while(map[i][++j] != '\0')
+		while(data->map[i][++j] != '\0')
 		{
-			if(map[i][j] == 'P')
+			if(data->map[i][j] == 'P')
 			{
-				*x = j;
-				*y = i;
+				data->start_x = j;
+				data->start_y = i;
 				return ;
 			}
 		}
@@ -101,33 +102,27 @@ int	exit_program(t_data *data)
 
 int	on_keypress(int keysym, t_data *data)
 {
-	int	x;
-	int	y;
-
-	get_start_pos(&x, &y, data->map);
 	if (keysym == ESC)
 		exit_program(data);
 	else if (keysym == W || keysym == UP)
-	{
-		if (y > 0 && data->map[y - 1][x] != '1')
-		{
-			data->map[y][x] = '0';
-			data->map[y - 1][x] = 'P';
-			print_map(data);
-			printf("Pressed key: UP\n");
-		}
-	}
+		move(data, data->start_x, data->start_y - 1);
 	else if (keysym == A || keysym == LEFT)
-	{
-		printf("Pressed key: LEFT\n");
-	}
+		move(data, data->start_x - 1, data->start_y);
 	else if (keysym == S || keysym == DOWN)
-	{
-		printf("Pressed key: DOWN\n");
-	}
+		move(data, data->start_x, data->start_y + 1);
 	else if (keysym == D || keysym == RIGHT)
-	{
-		printf("Pressed key: RIGHT\n");
-	}
+		move(data, data->start_x + 1, data->start_y);
 	return (0);
+}
+
+void	move(t_data *data, int new_x, int new_y)
+{
+	if (data->map[new_y][new_x] != '1')
+	{
+		data->map[data->start_y][data->start_x] = '0';
+		data->start_x = new_x;
+		data->start_y = new_y;
+		data->map[data->start_y][data->start_x] = 'P';
+		print_map(data);
+	}
 }

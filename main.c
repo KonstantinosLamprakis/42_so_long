@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:31:49 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 11:23:56 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 11:32:02 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,11 @@
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	int		i;
 
 	data.map = get_map(argc, argv);
 	if (!data.map)
 		exit(1);
-	i = -1;
-	while (data.map[++i])
-		printf("%s\n", data.map[i]);
+	set_start_pos(&data);
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		return (1);

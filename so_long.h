@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:42:40 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 11:26:25 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 11:30:45 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_data
 	char	**map;
 	int		moves;
 	int		collectives;
+	int		start_x;
+	int		start_y;
 }			t_data;
 
 typedef struct	s_img {
@@ -68,7 +70,7 @@ char	**get_map(int argc, char **argv);
 // Declarations of main_utils.c
 void	print_map(t_data *data);
 int		get_map_len(char **map);
-void	get_start_pos(int *x, int *y, char **map);
+void	set_start_pos(t_data *data);
 int		on_destroy(t_data *data);
 int		exit_program(t_data *data);
 int		on_keypress(int keysym, t_data *data);
