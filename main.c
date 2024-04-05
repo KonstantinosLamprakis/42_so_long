@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:31:49 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 17:43:44 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:08:17 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 // mlx_destroy_display(data->mlx); -> in another version
 
 // cc -Wall -Werror -Wextra *.c *.h && ./a.out map.ber
-// norminette get_next_line_utils.c get_next_line.c so_long.h main.c main_utils.c validation.c validation_utils.c main_utils2.c
+// norminette get_next_line_utils.c get_next_line.c so_long.h
+//main.c main_utils.c validation.c validation_utils.c main_utils2.c
 
 /*
 	Input validation rules:
@@ -65,4 +66,43 @@ int	main(int argc, char **argv)
 	print_map(&data);
 	mlx_loop(data.mlx);
 	return (0);
+}
+
+// returns the length of the map, basically the number of rows
+int	get_map_len(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		i++;
+	return (i);
+}
+
+// free everything
+int	exit_program(t_data *data)
+{
+	mlx_destroy_window(data->mlx, data->win);
+	free(data->mlx);
+	if (data->i_gate1)
+		mlx_destroy_image(data->mlx, data->i_gate1);
+	if (data->i_gate2)
+		mlx_destroy_image(data->mlx, data->i_gate2);
+	if (data->i_player1)
+		mlx_destroy_image(data->mlx, data->i_player1);
+	if (data->i_player2)
+		mlx_destroy_image(data->mlx, data->i_player2);
+	if (data->i_wall)
+		mlx_destroy_image(data->mlx, data->i_wall);
+	if (data->i_bg)
+		mlx_destroy_image(data->mlx, data->i_bg);
+	if (data->i_col[0])
+		mlx_destroy_image(data->mlx, data->i_col[0]);
+	if (data->i_col[1])
+		mlx_destroy_image(data->mlx, data->i_col[1]);
+	if (data->i_col[2])
+		mlx_destroy_image(data->mlx, data->i_col[2]);
+	if (data->i_col[3])
+		mlx_destroy_image(data->mlx, data->i_col[3]);
+	exit(0);
 }

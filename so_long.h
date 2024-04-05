@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:42:40 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 17:43:19 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:59:24 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int		check_args(int argc, char **argv);
 char	**get_map(int argc, char **argv);
 // Declarations of main_utils.c
 void	print_map(t_data *data);
-int		get_map_len(char **map);
 void	game_init(t_data *data);
 void	imgs_init(t_data *d);
 int		exit_program(t_data *data);
@@ -100,4 +99,6 @@ int		exit_program(t_data *data);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_itoa(int n);
 int		on_keypress(int keysym, t_data *data);
+// Declarations of main.c
+int		get_map_len(char **map);
 #endif
