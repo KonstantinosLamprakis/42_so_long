@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:42:40 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 09:17:39 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 10:44:51 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 // Custom declarations
 # include "./mlx/mlx.h"
 # define BUFFER_SIZE 42
+# define IMG_SIZE 60
 # define ESC 53
 # define W 13
 # define A 0

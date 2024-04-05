@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:31:49 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 09:19:54 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 10:45:01 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 
 #include "so_long.h"
 
+static int get_map_len(char **map);
+
 int	on_destroy(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
@@ -73,43 +75,75 @@ int	on_keypress(int keysym, t_data *data)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_data	data;
 	void	*img;
-	char	*relative_path = "./1.xpm";
-	int		img_width = 5;
-	int		img_height = 5;
+	int		img_width;
+	int		img_height;
+	char	**map;
+	int		i;
+	int		j;
 
+	map = get_map(argc, argv);
+	if (!map)
+		exit(1);
+	i = -1;
+	while (map[++i])
+		printf("%s\n", map[i]);
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		return (1);
-	data.win = mlx_new_window(data.mlx, 600, 400, "hi :)");
+	data.win = mlx_new_window(data.mlx, ft_strlen(map[0]) * IMG_SIZE, get_map_len(map) * IMG_SIZE, "Game of Life");
 	if (!data.win)
 		return (free(data.mlx), 1);
 	mlx_key_hook(data.win, on_keypress, &data);
 	mlx_hook(data.win, ON_DESTROY, 0, exit_program, &data);
-	img = mlx_xpm_file_to_image(data.mlx, relative_path, &img_width, &img_height);
-	mlx_put_image_to_window(data.mlx, data.win, img, 0, 0);
+	i = -1;
+	while (map[++i])
+	{
+		j = -1;
+		while(map[i][++j] != '\0')
+		{
+			img = mlx_xpm_file_to_image(data.mlx, "xpm/bg.xpm", &img_width, &img_height);
+			mlx_put_image_to_window(data.mlx, data.win, img, j * IMG_SIZE, i * IMG_SIZE);
+			if (map[i][j] == '1')
+			{
+				img = mlx_xpm_file_to_image(data.mlx, "xpm/wall.xpm", &img_width, &img_height);
+				mlx_put_image_to_window(data.mlx, data.win, img, j * IMG_SIZE, i * IMG_SIZE);
+			}
+			else if(map[i][j] == 'P')
+			{
+				img = mlx_xpm_file_to_image(data.mlx, "xpm/start.xpm", &img_width, &img_height);
+				mlx_put_image_to_window(data.mlx, data.win, img, j * IMG_SIZE, i * IMG_SIZE);
+			}
+			else if(map[i][j] == 'E')
+			{
+				img = mlx_xpm_file_to_image(data.mlx, "xpm/end.xpm", &img_width, &img_height);
+				mlx_put_image_to_window(data.mlx, data.win, img, j * IMG_SIZE, i * IMG_SIZE);
+			}
+			else if(map[i][j] == 'C')
+			{
+				img = mlx_xpm_file_to_image(data.mlx, "xpm/gym1.xpm", &img_width, &img_height);
+				mlx_put_image_to_window(data.mlx, data.win, img, j * IMG_SIZE, i * IMG_SIZE);
+			}
+		}
+	}
 	mlx_loop(data.mlx);
 	return (0);
 }
 
+static int get_map_len(char **map)
+{
+	int	i;
+
+	i = 0;
+	while(map[i])
+		i++;
+	return (i);
+}
+
 // --------------------
-
-// -- main that takes arg input
-// int	main(int argc, char **argv)
-// {
-// 	char	**map;
-// 	int		i;
-
-// 	map = get_map(argc, argv);
-// 	if (!map)
-// 		exit(1);
-// 	i = -1;
-// 	while (map[++i])
-// 		printf("%s\n", map[i]);
-// }
 
 // -- Image with just a color dot
 // void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
