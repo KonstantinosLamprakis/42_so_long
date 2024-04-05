@@ -1,6 +1,8 @@
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = $(wildcard *.c)
+SRCS = get_next_line_utils.c get_next_line.c \
+main.c main_utils.c validation.c validation_utils.c \
+main_utils2.c
 
 OBJS = $(SRCS:.c=.o)
 

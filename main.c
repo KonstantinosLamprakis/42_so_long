@@ -6,19 +6,15 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:31:49 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 18:08:17 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:14:49 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // TODO:
 // remove stdio.h from .h
-// remove wildcard from makefile
-// check fd for error after open-close-read
-	// - on error: free mem, exit with "Error\n" followed by custom error msg
-	// - should have valid path from P to E
+// should have valid path from P to E
 // check for leaks also in get_next_line
 // add assets to git
-// mlx_destroy_display(data->mlx); -> in another version
 
 // cc -Wall -Werror -Wextra *.c *.h && ./a.out map.ber
 // norminette get_next_line_utils.c get_next_line.c so_long.h
