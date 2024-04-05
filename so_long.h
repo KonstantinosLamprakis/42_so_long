@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:42:40 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 14:36:15 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:37:27 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,7 @@ void	game_init(t_data *data);
 void	imgs_init(t_data *d);
 int		exit_program(t_data *data);
 int		on_keypress(int keysym, t_data *data);
+// --
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_itoa(int n);
 #endif

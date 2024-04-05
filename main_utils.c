@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:20:41 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 14:50:26 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:41:12 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ void	print_map(t_data *d)
 				mlx_put_image_to_window(d->mlx, d->win, d->i_col[j % 4], j * IMG_S, i * IMG_S);
 		}
 	}
+	if (d->num_moves % 2 == 1)
+		mlx_string_put(d->mlx, d->win, (ft_strlen(d->map[0]) * IMG_S / 2), 25, 0x00FFFFFF, "MOVES");
+	else
+		mlx_string_put(d->mlx, d->win, (ft_strlen(d->map[0]) * IMG_S / 2), 25, 0x00FFFFFF, "HELLO\nWORLD");
+	// printf("moves: %d\ncolected: %d/%d\n", data->num_moves, data->eaten_col, data->num_col);
 }
 
 int	get_map_len(char **map)
@@ -130,8 +135,8 @@ static void	move(t_data *data, int new_x, int new_y)
 			return ;
 		else
 		{
-			printf("WIN\n");
-			exit(1);
+			write(1, "YOU WIN!\n", 9);
+			exit_program(data);
 		}
 	}
 	if (data->map[new_y][new_x] != '1')
@@ -141,7 +146,6 @@ static void	move(t_data *data, int new_x, int new_y)
 		data->start_x = new_x;
 		data->start_y = new_y;
 		data->map[data->start_y][data->start_x] = 'P';
-		printf("moves: %d\ncolected: %d/%d\n", data->num_moves, data->eaten_col, data->num_col);
 		print_map(data);
 	}
 }
