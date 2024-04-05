@@ -6,12 +6,13 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:10:42 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 15:37:10 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:43:22 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+static void	move(t_data *data, int new_x, int new_y);
 static void	positive_itoa(long n, char **result, int i, int sign);
 
 char	*ft_itoa(int n)
@@ -86,4 +87,47 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	result[i + j] = '\0';
 	return (result);
+}
+
+// called whenever the user press a key
+// is a hook function
+int	on_keypress(int keysym, t_data *data)
+{
+	if (keysym == ESC)
+		exit_program(data);
+	else if (keysym == W || keysym == UP)
+		move(data, data->start_x, data->start_y - 1);
+	else if (keysym == A || keysym == LEFT)
+		move(data, data->start_x - 1, data->start_y);
+	else if (keysym == S || keysym == DOWN)
+		move(data, data->start_x, data->start_y + 1);
+	else if (keysym == D || keysym == RIGHT)
+		move(data, data->start_x + 1, data->start_y);
+	return (0);
+}
+
+// move the player 1 position and updates the values
+static void	move(t_data *data, int new_x, int new_y)
+{
+	if (data->map[new_y][new_x] == 'C')
+		data->eaten_col += 1;
+	if (data->map[new_y][new_x] == 'E')
+	{
+		if (data->eaten_col < data->num_col)
+			return ;
+		else
+		{
+			write(1, "YOU WIN!\n", 9);
+			exit_program(data);
+		}
+	}
+	if (data->map[new_y][new_x] != '1')
+	{
+		data->num_moves += 1;
+		data->map[data->start_y][data->start_x] = '0';
+		data->start_x = new_x;
+		data->start_y = new_y;
+		data->map[data->start_y][data->start_x] = 'P';
+		print_map(data);
+	}
 }

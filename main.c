@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:31:49 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 15:18:23 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:43:44 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@
 // mlx_destroy_display(data->mlx); -> in another version
 
 // cc -Wall -Werror -Wextra *.c *.h && ./a.out map.ber
-// norminette get_next_line_utils.c get_next_line.c so_long.h main.c
-// main_utils.c validation.c validation_utils.c
+// norminette get_next_line_utils.c get_next_line.c so_long.h main.c main_utils.c validation.c validation_utils.c main_utils2.c
 
 /*
 	Input validation rules:

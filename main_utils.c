@@ -6,14 +6,15 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:20:41 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 15:41:12 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:56:47 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	move(t_data *data, int new_x, int new_y);
+static void	print_stats(t_data *d);
 
+// prints the map in every new move of the player
 void	print_map(t_data *d)
 {
 	int		i;
@@ -40,13 +41,35 @@ void	print_map(t_data *d)
 				mlx_put_image_to_window(d->mlx, d->win, d->i_col[j % 4], j * IMG_S, i * IMG_S);
 		}
 	}
-	if (d->num_moves % 2 == 1)
-		mlx_string_put(d->mlx, d->win, (ft_strlen(d->map[0]) * IMG_S / 2), 25, 0x00FFFFFF, "MOVES");
-	else
-		mlx_string_put(d->mlx, d->win, (ft_strlen(d->map[0]) * IMG_S / 2), 25, 0x00FFFFFF, "HELLO\nWORLD");
-	// printf("moves: %d\ncolected: %d/%d\n", data->num_moves, data->eaten_col, data->num_col);
+	print_stats(d);
 }
 
+static void	print_stats(t_data *d)
+{
+	char	*temp1;
+	char	*temp2;
+	char	*str1;
+	char	*str2;
+
+	temp1 = ft_itoa(d->num_moves);
+	str1 = ft_strjoin("Moves: ", temp1);
+	free(temp1);
+	temp1 = ft_itoa(d->eaten_col);
+	str2 = ft_strjoin("Collectived: ", temp1);
+	free(temp1);
+	temp2 = ft_strjoin(str2, " \\ ");
+	free(str2);
+	temp1 = ft_itoa(d->num_col);
+	str2 = ft_strjoin(temp2, temp1);
+	free(temp1);
+	free(temp2);
+	mlx_string_put(d->mlx, d->win, (ft_strlen(d->map[0]) * IMG_S / 2), 25, 0x00FFFFFF, str1);
+	mlx_string_put(d->mlx, d->win, (ft_strlen(d->map[0]) * IMG_S / 2), 50, 0x00FFFFFF, str2);
+	free(str1);
+	free(str2);
+}
+
+// returns the length of the map, basically the number of rows
 int	get_map_len(char **map)
 {
 	int	i;
@@ -57,6 +80,7 @@ int	get_map_len(char **map)
 	return (i);
 }
 
+// initialize position of starting point, ending point, number of collectives
 void	game_init(t_data *data)
 {
 	int	i;
@@ -86,6 +110,7 @@ void	game_init(t_data *data)
 	}
 }
 
+// initialize all the images
 void	imgs_init(t_data *d)
 {
 	int	w;
@@ -101,51 +126,38 @@ void	imgs_init(t_data *d)
 	d->i_col[3] = mlx_xpm_file_to_image(d->mlx, "xpms/gym4.xpm", &w, &h);
 	d->i_wall = mlx_xpm_file_to_image(d->mlx, "xpms/wall.xpm", &w, &h);
 	d->i_bg = mlx_xpm_file_to_image(d->mlx, "xpms/bg.xpm", &w, &h);
+	if (!d->i_gate1 || !d->i_gate2 || !d->i_player1 || !d->i_player2)
+		exit_program(d);
+	if (!d->i_col[0] || !d->i_col[1] || !d->i_col[2] || !d->i_col[3])
+		exit_program(d);
+	if (!d->i_wall || !d->i_bg)
+		exit_program(d);
 }
 
+// free everything
 int	exit_program(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
 	free(data->mlx);
+	if (data->i_gate1)
+		mlx_destroy_image(data->mlx, data->i_gate1);
+	if (data->i_gate2)
+		mlx_destroy_image(data->mlx, data->i_gate2);
+	if (data->i_player1)
+		mlx_destroy_image(data->mlx, data->i_player1);
+	if (data->i_player2)
+		mlx_destroy_image(data->mlx, data->i_player2);
+	if (data->i_wall)
+		mlx_destroy_image(data->mlx, data->i_wall);
+	if (data->i_bg)
+		mlx_destroy_image(data->mlx, data->i_bg);
+	if (data->i_col[0])
+		mlx_destroy_image(data->mlx, data->i_col[0]);
+	if (data->i_col[1])
+		mlx_destroy_image(data->mlx, data->i_col[1]);
+	if (data->i_col[2])
+		mlx_destroy_image(data->mlx, data->i_col[2]);
+	if (data->i_col[3])
+		mlx_destroy_image(data->mlx, data->i_col[3]);
 	exit(0);
-}
-
-int	on_keypress(int keysym, t_data *data)
-{
-	if (keysym == ESC)
-		exit_program(data);
-	else if (keysym == W || keysym == UP)
-		move(data, data->start_x, data->start_y - 1);
-	else if (keysym == A || keysym == LEFT)
-		move(data, data->start_x - 1, data->start_y);
-	else if (keysym == S || keysym == DOWN)
-		move(data, data->start_x, data->start_y + 1);
-	else if (keysym == D || keysym == RIGHT)
-		move(data, data->start_x + 1, data->start_y);
-	return (0);
-}
-
-static void	move(t_data *data, int new_x, int new_y)
-{
-	if (data->map[new_y][new_x] == 'C')
-		data->eaten_col += 1;
-	if (data->map[new_y][new_x] == 'E')
-	{
-		if (data->eaten_col < data->num_col)
-			return ;
-		else
-		{
-			write(1, "YOU WIN!\n", 9);
-			exit_program(data);
-		}
-	}
-	if (data->map[new_y][new_x] != '1')
-	{
-		data->num_moves += 1;
-		data->map[data->start_y][data->start_x] = '0';
-		data->start_x = new_x;
-		data->start_y = new_y;
-		data->map[data->start_y][data->start_x] = 'P';
-		print_map(data);
-	}
 }
