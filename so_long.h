@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:42:40 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 11:30:45 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:36:15 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 // Custom declarations
 # include "./mlx/mlx.h"
 # define BUFFER_SIZE 42
-# define IMG_SIZE 60
+// im_s : image size(its square)
+# define IMG_S 60
 # define ESC 53
 # define W 13
 # define A 0
@@ -32,25 +33,47 @@
 # define RIGHT 124
 # define ON_DESTROY 17
 
-typedef struct s_data
+typedef struct s_img
 {
-	void	*mlx;
-	void	*win;
-	char	**map;
-	int		moves;
-	int		collectives;
-	int		start_x;
-	int		start_y;
-}			t_data;
-
-typedef struct	s_img {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_img;
+}			t_img;
 
+// t_img: one image per map element
+// map[][]: a NULL terminated array of strings-lines of the map
+// eaten_col: how many collectives the player eated
+// num_col: total number of collectives
+// start_x; column of starting point 'P'
+// start_y; row of starting point 'P'
+// end_x; column of ending point 'E'
+// end_y; row of ending point 'E'
+// num_moves: how many moves player did
+// player1: player before collect all the collectives
+// player2: player after collect all the collectives
+// gate1, gate2 same as players but for gate
+typedef struct s_data
+{
+	void	*mlx;
+	void	*win;
+	char	**map;
+	int		num_moves;
+	int		num_col;
+	int		eaten_col;
+	int		start_x;
+	int		start_y;
+	int		end_x;
+	int		end_y;
+	t_img	*i_bg;
+	t_img	*i_player1;
+	t_img	*i_player2;
+	t_img	*i_col[4];
+	t_img	*i_gate1;
+	t_img	*i_gate2;
+	t_img	*i_wall;
+}			t_data;
 
 // Declarations of get_next_line
 char	*get_next_line(int fd);
@@ -70,8 +93,8 @@ char	**get_map(int argc, char **argv);
 // Declarations of main_utils.c
 void	print_map(t_data *data);
 int		get_map_len(char **map);
-void	set_start_pos(t_data *data);
-int		on_destroy(t_data *data);
+void	game_init(t_data *data);
+void	imgs_init(t_data *d);
 int		exit_program(t_data *data);
 int		on_keypress(int keysym, t_data *data);
 #endif

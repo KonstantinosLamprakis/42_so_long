@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:31:49 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 11:32:02 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:38:11 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@
 	// - should have valid path from P to E
 // check for leaks also in get_next_line
 // add assets to git
+// mlx_destroy_display(data->mlx); -> in another version
 
 // cc -Wall -Werror -Wextra *.c *.h && ./a.out map.ber
+// norminette get_next_line_utils.c get_next_line.c so_long.h main.c
+// main_utils.c validation.c validation_utils.c
 
 /*
 	Input validation rules:
@@ -49,13 +52,15 @@ int	main(int argc, char **argv)
 	data.map = get_map(argc, argv);
 	if (!data.map)
 		exit(1);
-	set_start_pos(&data);
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		return (1);
-	data.win = mlx_new_window(data.mlx, ft_strlen(data.map[0]) * IMG_SIZE, get_map_len(data.map) * IMG_SIZE, "Game of Life");
+	data.win = mlx_new_window(data.mlx, ft_strlen(data.map[0]) * IMG_S, \
+	get_map_len(data.map) * IMG_S, "Game of Life");
 	if (!data.win)
 		return (free(data.mlx), 1);
+	game_init(&data);
+	imgs_init(&data);
 	mlx_key_hook(data.win, on_keypress, &data);
 	mlx_hook(data.win, ON_DESTROY, 0, exit_program, &data);
 	print_map(&data);
