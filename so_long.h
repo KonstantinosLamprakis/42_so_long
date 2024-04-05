@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:42:40 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 10:44:51 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/05 11:26:25 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
+	char	**map;
+	int		moves;
+	int		collectives;
 }			t_data;
 
 typedef struct	s_img {
@@ -62,4 +65,11 @@ int		check_chars(char **map);
 int		check_args(int argc, char **argv);
 // Declarations of validation.c
 char	**get_map(int argc, char **argv);
+// Declarations of main_utils.c
+void	print_map(t_data *data);
+int		get_map_len(char **map);
+void	get_start_pos(int *x, int *y, char **map);
+int		on_destroy(t_data *data);
+int		exit_program(t_data *data);
+int		on_keypress(int keysym, t_data *data);
 #endif
