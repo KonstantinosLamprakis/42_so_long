@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 17:58:02 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 10:01:51 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/08 00:22:30 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,19 +95,3 @@ static char	**clean_map_file(char **map, int fd, char *err_msg)
 	free(map);
 	return (NULL);
 }
-
-// returns 0 on error, 1 otherwise
-// errors:
-// - not possible path for E, P or C
-// - All collectives and exit should be accesible from starting point
-// map: a NULL terminated array of strings-lines of the map
-// cols: number of char in each line, rows: number of line -> map[row][col]
-// static int	**check_paths(char **map, int cols, int rows)
-// {
-// 	int	count_c;
-// 	int	is_p;
-// 	int	is_e;
-// 	int	i;
-// 	int	j;
-
-// }

@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:31:49 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 18:14:49 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/07 21:38:15 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	main(int argc, char **argv)
 
 	data.map = get_map(argc, argv);
 	if (!data.map)
+		exit(1);
+	if (!check_paths(data.map))
 		exit(1);
 	data.mlx = mlx_init();
 	if (!data.mlx)
