@@ -6,15 +6,9 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:31:49 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/08 00:39:57 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/08 01:23:39 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// TODO:
-// remove stdio.h from .h
-// should have valid path from P to E
-// check for leaks also in get_next_line
-// add assets to git
 
 // cc -Wall -Werror -Wextra *.c *.h && ./a.out map.ber
 // norminette get_next_line_utils.c get_next_line.c so_long.h main.c
@@ -40,6 +34,8 @@
 */
 
 #include "so_long.h"
+
+static void	destroy_map(t_data *data);
 
 int	main(int argc, char **argv)
 {
@@ -80,8 +76,8 @@ int	get_map_len(char **map)
 // free everything
 int	exit_program(t_data *data)
 {
-	mlx_destroy_window(data->mlx, data->win);
-	free(data->mlx);
+	int	i;
+
 	if (data->i_gate1)
 		mlx_destroy_image(data->mlx, data->i_gate1);
 	if (data->i_gate2)
@@ -102,5 +98,17 @@ int	exit_program(t_data *data)
 		mlx_destroy_image(data->mlx, data->i_col[2]);
 	if (data->i_col[3])
 		mlx_destroy_image(data->mlx, data->i_col[3]);
+	mlx_destroy_window(data->mlx, data->win);
+	destroy_map(data);
 	exit(0);
+}
+
+static void	destroy_map(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (data->map[++i])
+		free(data->map[i]);
+	free(data->map);
 }
