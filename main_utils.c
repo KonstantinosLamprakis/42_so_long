@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:20:41 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/05 18:08:05 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/07 19:45:34 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,16 +114,18 @@ void	imgs_init(t_data *d)
 	int	w;
 	int	h;
 
-	d->i_gate1 = mlx_xpm_file_to_image(d->mlx, "xpms/gate1.xpm", &w, &h);
-	d->i_gate2 = mlx_xpm_file_to_image(d->mlx, "xpms/gate2.xpm", &w, &h);
-	d->i_player1 = mlx_xpm_file_to_image(d->mlx, "xpms/player1.xpm", &w, &h);
-	d->i_player2 = mlx_xpm_file_to_image(d->mlx, "xpms/player2.xpm", &w, &h);
-	d->i_col[0] = mlx_xpm_file_to_image(d->mlx, "xpms/gym1.xpm", &w, &h);
-	d->i_col[1] = mlx_xpm_file_to_image(d->mlx, "xpms/gym2.xpm", &w, &h);
-	d->i_col[2] = mlx_xpm_file_to_image(d->mlx, "xpms/gym3.xpm", &w, &h);
-	d->i_col[3] = mlx_xpm_file_to_image(d->mlx, "xpms/gym4.xpm", &w, &h);
-	d->i_wall = mlx_xpm_file_to_image(d->mlx, "xpms/wall.xpm", &w, &h);
-	d->i_bg = mlx_xpm_file_to_image(d->mlx, "xpms/bg.xpm", &w, &h);
+	d->i_gate1 = mlx_xpm_file_to_image(d->mlx, "textures/gate1.xpm", &w, &h);
+	d->i_gate2 = mlx_xpm_file_to_image(d->mlx, "textures/gate2.xpm", &w, &h);
+	d->i_player1 = mlx_xpm_file_to_image \
+	(d->mlx, "textures/player1.xpm", &w, &h);
+	d->i_player2 = mlx_xpm_file_to_image \
+	(d->mlx, "textures/player2.xpm", &w, &h);
+	d->i_col[0] = mlx_xpm_file_to_image(d->mlx, "textures/gym1.xpm", &w, &h);
+	d->i_col[1] = mlx_xpm_file_to_image(d->mlx, "textures/gym2.xpm", &w, &h);
+	d->i_col[2] = mlx_xpm_file_to_image(d->mlx, "textures/gym3.xpm", &w, &h);
+	d->i_col[3] = mlx_xpm_file_to_image(d->mlx, "textures/gym4.xpm", &w, &h);
+	d->i_wall = mlx_xpm_file_to_image(d->mlx, "textures/wall.xpm", &w, &h);
+	d->i_bg = mlx_xpm_file_to_image(d->mlx, "textures/bg.xpm", &w, &h);
 	if (!d->i_gate1 || !d->i_gate2 || !d->i_player1 || !d->i_player2)
 		exit_program(d);
 	if (!d->i_col[0] || !d->i_col[1] || !d->i_col[2] || !d->i_col[3])
