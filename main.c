@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:31:49 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/08 01:23:39 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/08 01:25:24 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ int	get_map_len(char **map)
 // free everything
 int	exit_program(t_data *data)
 {
-	int	i;
-
 	if (data->i_gate1)
 		mlx_destroy_image(data->mlx, data->i_gate1);
 	if (data->i_gate2)
