@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 00:22:15 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/08 00:23:09 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/08 00:39:50 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	check_paths(char **map)
 	while (--i >= 0)
 		free (map_fill[i]);
 	free(map_fill);
+	if (not_valid)
+		write(1, "Not accesible all collectives and/or exit\n", 43);
 	return (!not_valid);
 }
 
@@ -56,7 +58,7 @@ static void	get_path(char **map, int *flag)
 	y = i;
 	flood(x, y, map);
 	i = -1;
-	while (map[++i] && !flag)
+	while (map[++i] && !(*flag))
 	{
 		j = -1;
 		while (map[i][++j])
@@ -79,7 +81,7 @@ static char	**copy_map(char **map, int len_x, int len_y)
 		result[i] = malloc((len_x + 1) * sizeof(char));
 		if (!result[i])
 		{
-			while(--i >= 0)
+			while (--i >= 0)
 				free(result[i]);
 			free(result);
 			return (NULL);

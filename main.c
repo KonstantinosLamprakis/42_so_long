@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:31:49 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/07 21:38:15 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/08 00:39:57 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 // add assets to git
 
 // cc -Wall -Werror -Wextra *.c *.h && ./a.out map.ber
-// norminette get_next_line_utils.c get_next_line.c so_long.h
-//main.c main_utils.c validation.c validation_utils.c main_utils2.c
+// norminette get_next_line_utils.c get_next_line.c so_long.h main.c
+// main_utils.c validation.c validation_utils.c main_utils2.c check_paths.c
 
 /*
 	Input validation rules:

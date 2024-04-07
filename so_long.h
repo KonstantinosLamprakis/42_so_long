@@ -6,7 +6,7 @@
 /*   By: klamprak <klamprak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:42:40 by klamprak          #+#    #+#             */
-/*   Updated: 2024/04/08 00:23:36 by klamprak         ###   ########.fr       */
+/*   Updated: 2024/04/08 00:39:26 by klamprak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ int		on_keypress(int keysym, t_data *data);
 // Declarations of main.c
 int		get_map_len(char **map);
 // Declarations of check_paths.c
-int	check_paths(char **map);
+int		check_paths(char **map);
 #endif
